@@ -12,7 +12,7 @@ server.get("/", (req, res) => {
 server.get("/api/users", (req, res) => {
   db.find()
     .then(info => {
-      res.status(200).json(info)
+      res.json(info)
     })
     .catch(err => {
       res.status(500).json({ errorMessage: "Error Message", err })
@@ -26,7 +26,7 @@ server.get("/api/users/:id", (req, res) => {
   db.findById(id)
     .then(info => {
       if (info) {
-        res.status(200).json(info)
+        res.json(info)
       } else {
         res.status(404).json({ message: "ID not found"})
       }
@@ -42,7 +42,7 @@ server.post("/api/users", (req, res) => {
   db.insert(newUser)
     .then(info => {
       if (info) {
-        res.status(200).json(newUser)
+        res.json(newUser)
       } else {
         res.status(400).json({ errorMessage: "Please provide name and bio for the user." })
       }
@@ -59,7 +59,7 @@ server.put("/api/users/:id", (req, res) => {
   db.update(id, newUser)
   .then(info => {
     if (info) {
-      res.status(200).json(newUser)
+      res.json(newUser)
     } else if (info){
       res.status(400).json({ errorMessage: "Please provide name and bio for the user." })
     } else {
